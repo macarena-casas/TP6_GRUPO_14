@@ -10,7 +10,7 @@ import entidad.Persona;
 
 public class Personadaoimpl implements Personadao {
 
-	private static final String insert = "insert into personas(Dni, Nombre, Apellido) values(?, ?, ?)";
+	
 	
 	
 	public boolean insert(Persona persona)
@@ -19,7 +19,12 @@ public class Personadaoimpl implements Personadao {
 		
 		try
 		{
-			cone.agregarpersona(persona);
+			// Agregar
+            //cone.setearSp("agregarPersona(?,?,?)");
+            //cone.setearParametros(1, "11");
+            //cone.setearParametros(2, "Don");
+            //cone.setearParametros(3, "Cirilio");
+            //cone.ejecutarAccion();
 		
 		} 
 		catch (Exception e) 

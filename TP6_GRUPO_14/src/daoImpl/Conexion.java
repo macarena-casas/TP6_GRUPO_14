@@ -2,53 +2,81 @@ package daoImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import daoImpl.Conexion;
-import entidad.Persona;
 
 public class Conexion {
-	
-    private static final String URL = "jdbc:mysql://localhost:3306/bdpersonas?useSSL=false";
-    private static final String USER = "root";
-    private static final String PASSWORD = "root";
 
-	
- 
- public Conexion() {
-     try {
-         Class.forName("com.mysql.cj.jdbc.Driver");
-     } catch (ClassNotFoundException e) {
-         e.printStackTrace();
-     }
- }
-	
- public Connection getConexion() {
-     Connection conexion = null;
-     try {
-         conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-     } catch (SQLException e) {
-         e.printStackTrace();
-     }
-     return conexion;
- }
- 
- public int agregarpersona (Persona pers) {
-		String query = "insert into personas(Dni,Nombre,Apellido)values('"+pers.getDni()+"','"+pers.getNombre()+"','"+pers.getApellido()+"') ";
-		Connection cn = null ;
-		int filas = 0;
-		try {
-			cn = DriverManager.getConnection(URL, USER, PASSWORD);
-			Statement st = cn.createStatement();
-			filas = st.executeUpdate(query);
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		return filas;
-	
-	}
-	 
+    private Connection conexion;
+    private PreparedStatement comando;
+    private ResultSet lector;
+
+    public ResultSet getLector() {
+        return lector;
+    }
+
+    
+    public Conexion() {
+        try {
+            String url = "jdbc:mysql://localhost:3306/bdpersonas"; 
+            String user = "root"; 
+            String password = ""; 
+            conexion = DriverManager.getConnection(url, user, password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+   
+    public void setearSp(String sp) throws SQLException {
+        comando = conexion.prepareStatement("{call " + sp + "}");
+    }
+
+    
+    public void setearConsulta(String consulta) throws SQLException {
+        comando = conexion.prepareStatement(consulta);
+    }
+
+    
+    public void ejecutarLectura() throws SQLException {
+        try {
+            lector = comando.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
+
+    
+    public void cerrarConexion() {
+        try {
+            if (lector != null && !lector.isClosed()) {
+                lector.close();
+            }
+            if (comando != null && !comando.isClosed()) {
+                comando.close();
+            }
+            if (conexion != null && !conexion.isClosed()) {
+                conexion.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    
+    public void setearParametros(int index, String str) throws SQLException {
+        comando.setObject(index, str);
+    }
+
+    
+    public void ejecutarAccion() throws SQLException {
+        try {
+            comando.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
 }
