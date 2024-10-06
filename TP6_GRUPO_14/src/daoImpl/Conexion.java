@@ -11,6 +11,9 @@ public class Conexion {
     private Connection conexion;
     private PreparedStatement comando;
     private ResultSet lector;
+    private String url = "jdbc:mysql://localhost:3306/bdpersonas"; 
+    private String user = "root"; 
+    private String password = "1234"; 
 
     public ResultSet getLector() {
         return lector;
@@ -18,11 +21,9 @@ public class Conexion {
 
     
     public Conexion() {
-        try {
-            String url = "jdbc:mysql://localhost:3306/bdpersonas"; 
-            String user = "root"; 
-            String password = ""; 
-            conexion = DriverManager.getConnection(url, user, password);
+        try { 
+            this.conexion = DriverManager.getConnection(url, user, password);
+            this.conexion.setAutoCommit(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
