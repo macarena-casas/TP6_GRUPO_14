@@ -25,9 +25,9 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 	}
 
 	@Override
-	public boolean modificarPersona(Persona Modificar, String dNI) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean modificarPersona(Persona modificar, String DNI) {
+		
+		return pdao.modificarPersona(modificar, DNI);
 	}
 
 	@Override

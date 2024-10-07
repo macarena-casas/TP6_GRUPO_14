@@ -10,7 +10,6 @@ import java.util.List;
 
 import dao.Personadao;
 import entidad.Persona;
-import presentacion.controlador.PanelListar;
 
 
 public class PersonaDaoImpl implements Personadao {
@@ -18,11 +17,8 @@ public class PersonaDaoImpl implements Personadao {
 	private static final String Agregar = "INSERT INTO personas(Dni, Nombre, Apellido) VALUES(?, ?, ?)";
 	private static final String Eliminar = "DELETE FROM personas WHERE Dni = ?";
 	private static final String readall = "SELECT * FROM personas";
+	private static final String Modificar = "UPDATE personas SET Dni = ?, Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
 	
-	public boolean modificarPersona(Persona Modificar, String dni) {
-		Personadao modificar = new PersonaDaoImpl();
-		return modificar.modificarPersona(Modificar, dni);
-	}
 	
 
 	@Override
@@ -91,7 +87,33 @@ public class PersonaDaoImpl implements Personadao {
 		
 		return isagregarExitoso;
 	}
-
+	
+	@Override
+	public boolean modificarPersona(Persona modificar, String dni) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean modificarOk = false;
+		try {
+			statement = conexion.prepareStatement(Modificar);
+			statement.setString(1, modificar.getDni());
+			statement.setString(2, modificar.getNombre());
+			statement.setString(3, modificar.getApellido());
+			statement.setString(4, dni);
+			
+			if(statement.executeUpdate() > 0) {
+				conexion.commit();
+				modificarOk = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return modificarOk;
+	}
 	
 
 

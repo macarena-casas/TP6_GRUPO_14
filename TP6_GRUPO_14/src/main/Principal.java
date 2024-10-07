@@ -13,7 +13,7 @@ public class Principal {
 		PersonaNegocio negocio = new PersonaNegocioImpl();
 		
 		
-		ControladorPrincipal controladorPrincipal = new ControladorPrincipal(frame);
+		ControladorPrincipal controladorPrincipal = new ControladorPrincipal(frame,negocio);
 		controladorPrincipal.inicializar();
 		
 

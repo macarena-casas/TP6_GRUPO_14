@@ -10,25 +10,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import entidad.Persona;
 
-public class PanelListar extends JFrame {
+public class PanelListar extends JPanel {
 
-    private JPanel contentPane;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
     private JTable PersonaTabla;
     private DefaultTableModel modelPersonas;
+    private JScrollPane spPersona;
     private String[] nombreColumnas = {"Nombre", "Apellido", "Dni"};
 
     public PanelListar() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new BorderLayout(0, 0));
-        setContentPane(contentPane);
-
-        JScrollPane spPersona = new JScrollPane();
-        spPersona.setBounds(15, 30, 383, 126);
-        contentPane.add(spPersona, BorderLayout.CENTER);
-
+    	
+		setLayout(null);
+ 
         modelPersonas = new DefaultTableModel(null, nombreColumnas);
         PersonaTabla = new JTable(modelPersonas);
 
@@ -37,9 +31,15 @@ public class PanelListar extends JFrame {
         PersonaTabla.getColumnModel().getColumn(1).setPreferredWidth(50);
         PersonaTabla.getColumnModel().getColumn(1).setResizable(false);
         PersonaTabla.getColumnModel().getColumn(2).setPreferredWidth(50);
-        PersonaTabla.getColumnModel().getColumn(2).setResizable(false);
-
+        PersonaTabla.getColumnModel().getColumn(2).setResizable(false); 
+        
+        spPersona  = new JScrollPane();
+        spPersona.setBounds(15, 30, 383, 126);
+        
         spPersona.setViewportView(PersonaTabla);
+        add(spPersona, BorderLayout.CENTER);
+
+        
     }
 
     public DefaultTableModel getModelPersonas() {
