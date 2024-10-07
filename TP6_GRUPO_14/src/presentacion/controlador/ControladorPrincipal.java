@@ -3,6 +3,8 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import negocio.PersonaNegocio;
+import negociolmpl.PersonaNegocioImpl;
 import presentacion.vista.PanelAgregar;
 import presentacion.vista.VistaPrincipal;
 
@@ -15,20 +17,16 @@ public class ControladorPrincipal implements ActionListener{
 		this.vistaPrincipal = vista;
 		
 		this.panelAgregar = new PanelAgregar();
-		
-		
+			
 		this.vistaPrincipal.getMenuAgregar().addActionListener(a->EventoClickAbrirPanelAgregar(a));
-		
+
 	}
-	
-	
-	
 	
 	public void  EventoClickAbrirPanelAgregar(ActionEvent a)
 	{	
 		panelAgregar = new PanelAgregar();
-		//PersonaNegocio personaNegocio = new PersonaNegocioImpl();
-		//ControladorAgregar controladorAgregar = new ControladorAgregar(panelAgregar,personaNegocio);
+		PersonaNegocio personaNegocio = new PersonaNegocioImpl();
+		ControladorAgregar controladorAgregar = new ControladorAgregar(panelAgregar,personaNegocio);
 		this.vistaPrincipal.setContentPane(panelAgregar);
 		this.vistaPrincipal.getContentPane().repaint();
 		this.vistaPrincipal.getContentPane().revalidate();
@@ -42,8 +40,7 @@ public class ControladorPrincipal implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 	
 }

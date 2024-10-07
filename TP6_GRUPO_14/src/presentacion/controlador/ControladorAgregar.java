@@ -2,6 +2,7 @@ package presentacion.controlador;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -11,17 +12,15 @@ import entidad.Persona;
 import negocio.PersonaNegocio;
 import presentacion.vista.PanelAgregar;
 
-public class ControladorAgregar {
+public class ControladorAgregar implements ActionListener {
 	
 	private PanelAgregar panelAgregar;
 	private PersonaNegocio perNegocio;
-	
+
 	public ControladorAgregar(PanelAgregar panel, PersonaNegocio negocio) {
 		this.panelAgregar = panel;
 		this.perNegocio = negocio;
 
-		
-		
 		panelAgregar.getBtnAceptar().addActionListener(l -> agregarPersona(l));
 		panelAgregar.getTextFieldDni().addKeyListener(new KeyAdapter() {
 			@Override
@@ -38,16 +37,18 @@ public class ControladorAgregar {
 		
 
 	}
-	
-	
-	private void agregarPersona(ActionEvent m) {
+
+	private void agregarPersona(ActionEvent l) {
+
 		if(validarTextfield()) {
 			Persona persona = new Persona();
 			persona.setNombre(panelAgregar.getTextFieldNombre().getText());
 			persona.setApellido(panelAgregar.getTextFieldApellido().getText());
 			persona.setDni(panelAgregar.getTextFieldDni().getText());
 			//if (perNegocio.getPersonaPorDni(persona.getDni()) == null) {
+
 				if(perNegocio.agregarPersona(persona)) {
+															
 				JOptionPane.showMessageDialog(null, "Persona agregada correctamente");
 				limpiarTextfield();
 				}else {
@@ -58,6 +59,8 @@ public class ControladorAgregar {
 			}
 		}else {*/
 			JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos");
+		
+		
 		}
 		
 	}
@@ -105,6 +108,12 @@ public class ControladorAgregar {
 		panelAgregar.getTextFieldApellido().setText("");
 		panelAgregar.getTextFieldNombre().setText("");
 		panelAgregar.getTextFieldDni().setText("");
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+
 	}
 
 }

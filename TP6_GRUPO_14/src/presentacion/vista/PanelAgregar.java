@@ -78,10 +78,11 @@ public class PanelAgregar extends JPanel {
 	}
 
 	public JButton getBtnAceptar() {
+		
 		return btnAceptar;
 	}
 
-	public void setBtnAceptar(JButton btnAceptar) {
+	/*public void setBtnAceptar(JButton btnAceptar) {
 		this.btnAceptar = btnAceptar;
-	}
+	}*/
 }

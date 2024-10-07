@@ -13,7 +13,9 @@ public class Conexion {
     private ResultSet lector;
     private String url = "jdbc:mysql://localhost:3306/bdpersonas"; 
     private String user = "root"; 
-    private String password = "1234"; 
+    private String password = "root"; 
+	public static Conexion instancia;
+
 
     public ResultSet getLector() {
         return lector;
@@ -34,7 +36,21 @@ public class Conexion {
         comando = conexion.prepareStatement("{call " + sp + "}");
     }
 
-    
+	public static Conexion getConexion()   
+	{								
+		if(instancia == null)
+		{
+			instancia = new Conexion();
+		}
+		return instancia;
+	}
+
+	public Connection getSQLConexion() 
+	{
+		return this.conexion;
+	}
+	
+	
     public void setearConsulta(String consulta) throws SQLException {
         comando = conexion.prepareStatement(consulta);
     }
