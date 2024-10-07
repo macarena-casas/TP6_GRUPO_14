@@ -3,12 +3,14 @@ package daoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.Personadao;
 import entidad.Persona;
+import presentacion.controlador.PanelListar;
 
 
 public class PersonaDaoImpl implements Personadao {
@@ -25,9 +27,28 @@ public class PersonaDaoImpl implements Personadao {
 
 	@Override
 	public List<Persona> readAll() {
-		Personadao perdao = new PersonaDaoImpl();
-		return perdao.readAll();
-		
+		PreparedStatement statement;
+		ResultSet result;
+		ArrayList <Persona> personas = new ArrayList<Persona>();
+		Conexion conexion =Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readall);
+			result = statement.executeQuery();
+			while(result.next()) {
+				personas.add(getPersona(result));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return personas;
+	
+	}
+	private Persona getPersona(ResultSet result) throws SQLException{
+		String nombre =result.getString("Nombre");
+		String dni =result.getString("Dni");
+		String apellido =result.getString("Apellido");
+		return new Persona (dni,nombre,apellido);
 	}
 
 	@Override
@@ -71,7 +92,7 @@ public class PersonaDaoImpl implements Personadao {
 		return isagregarExitoso;
 	}
 
-
+	
 
 
 	

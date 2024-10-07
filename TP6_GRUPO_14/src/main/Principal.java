@@ -11,7 +11,8 @@ public class Principal {
 		
 		VistaPrincipal frame = new VistaPrincipal();
 		PersonaNegocio negocio = new PersonaNegocioImpl();
-
+		
+		
 		ControladorPrincipal controladorPrincipal = new ControladorPrincipal(frame);
 		controladorPrincipal.inicializar();
 		
