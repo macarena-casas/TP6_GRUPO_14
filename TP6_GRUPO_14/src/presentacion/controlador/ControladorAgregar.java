@@ -58,11 +58,13 @@ public class ControladorAgregar implements ActionListener {
 				JOptionPane.showMessageDialog(null, "ERROR - Persona con Dni = "+panelAgregar.getTextFieldDni().getText()+" ya existe");
 			}
 		}else {*/
+			
+		
+		
+		} else {
+			
 			JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos");
-		
-		
 		}
-		
 	}
 	
 	private boolean validarTextfield() {
@@ -113,7 +115,7 @@ public class ControladorAgregar implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
+		// TODO Auto-generated method stub
 	}
 
 }

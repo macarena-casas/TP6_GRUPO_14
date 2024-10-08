@@ -8,6 +8,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import entidad.Persona;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class PanelModificar extends JPanel {
 
@@ -50,6 +53,12 @@ public class PanelModificar extends JPanel {
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(189, 253, 125, 23);
 		add(btnModificar);
+		
+		JLabel lblModificarPersonas = new JLabel("Modificar Personas");
+		lblModificarPersonas.setFont(new Font("Calibri", Font.BOLD, 11));
+		lblModificarPersonas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblModificarPersonas.setBounds(25, 11, 450, 14);
+		add(lblModificarPersonas);
 
 	}
 
@@ -109,5 +118,4 @@ public class PanelModificar extends JPanel {
 	public void setBtnModificar(JButton btnModificar) {
 		this.btnModificar = btnModificar;
 	}
-
 }

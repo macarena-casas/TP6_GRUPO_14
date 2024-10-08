@@ -23,6 +23,7 @@ public class ControladorModificar implements ActionListener {
 	private PersonaNegocio PerNeg;
 	private DefaultListModel<Persona> listmodel;
 	
+
 	public ControladorModificar(PanelModificar panel, PersonaNegocio negocio) {
 		this.panelModificar = panel;
 		this.PerNeg = negocio;
@@ -34,6 +35,7 @@ public class ControladorModificar implements ActionListener {
 			@Override
 			public void keyTyped(KeyEvent e) {soloNumerosDNI(e);}
 		});
+		panelModificar.getTxfDNI().setEditable(false);
 		panelModificar.getTxfNombre().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {soloLetras(e, panelModificar.getTxfNombre().getText());}
@@ -42,6 +44,7 @@ public class ControladorModificar implements ActionListener {
 			@Override
 			public void keyTyped(KeyEvent e)  {soloLetras(e, panelModificar.getTxfApellido().getText());}
 		});
+		
 	}
 
 	private void soloNumerosDNI(KeyEvent e) {
@@ -136,6 +139,8 @@ public class ControladorModificar implements ActionListener {
 		
 		cargarLista();
 	}
+	
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

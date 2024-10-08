@@ -61,7 +61,7 @@ public class ControladorPrincipal implements ActionListener{
 	public void EventoClickAbrirPanelListar(ActionEvent a)
 	{		
 		panelListar = new PanelListar();
-		//ControladorListar controladorListar = new ControladorListar(panelListar,personaNegocio);
+		ControladorListar controladorListar = new ControladorListar(panelListar,personaNegocio);
 		this.vistaPrincipal.setContentPane(panelListar);
 		this.vistaPrincipal.repaint();
 		this.vistaPrincipal.revalidate();
@@ -78,7 +78,7 @@ public class ControladorPrincipal implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-	
+		// TODO Auto-generated method stub
 	}
 	
 }

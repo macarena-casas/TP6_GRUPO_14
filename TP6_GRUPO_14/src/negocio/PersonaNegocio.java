@@ -10,6 +10,7 @@ public interface PersonaNegocio {
 	public boolean agregarPersona (Persona Agregar);
 	public boolean modificarPersona(Persona Modificar, String dNI);
 	public boolean eliminarPersona(Persona Eliminar);
+	public List<Persona> listarPersonas();
 	public List<Persona> readAll();
 
 }

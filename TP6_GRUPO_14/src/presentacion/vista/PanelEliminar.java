@@ -18,38 +18,46 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelEliminar extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
-	private JTextArea textArea;
 	private JButton btnEliminar;
 	private JLabel lblEliminar;
+	private JList<Persona> listPersonas;
+	private DefaultListModel<Persona> model;
+	private JScrollPane Scroll;
 	public PanelEliminar() {
 		
 		setLayout(null);
 		
 		lblEliminar = new JLabel("Eliminar usuario");
+		lblEliminar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEliminar.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblEliminar.setBounds(157, 11, 101, 27);
+		lblEliminar.setBounds(10, 11, 430, 27);
 		add(lblEliminar);
-		
-		textArea = new JTextArea();
-		textArea.setBounds(143, 37, 131, 149);
-		
-		add(textArea);
-		textArea.setColumns(10);
-		textArea.setRows(10);
-		textArea.setLineWrap(true); 
 		
 		
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnEliminar.setFont(new Font("Arial", Font.BOLD, 13));
-		btnEliminar.setBounds(143, 197, 131, 23);
+		btnEliminar.setBounds(160, 245, 133, 23);
 		add(btnEliminar);
+		
+		listPersonas = new JList<Persona>();
+		listPersonas.setBounds(10, 46, 430, 177);
+		add(listPersonas);
 	}
 
 	public JButton getBtnEliminar() {
@@ -62,14 +70,7 @@ public class PanelEliminar extends JPanel {
 	}
 
 
-	public JTextArea getTextArea() {
-		return textArea;
-	}
-
-
-	public void setTextArea(JTextArea textArea) {
-		this.textArea = textArea;
-	}
+	
 
 
 	public JLabel getLblEliminar() {
@@ -81,15 +82,29 @@ public class PanelEliminar extends JPanel {
 		this.lblEliminar = lblEliminar;
 	}
 	
-	public void llenar (List <Persona> personas) {
-		
-		 StringBuilder sb = new StringBuilder();
-	        for (Persona persona : personas) {
-	            sb.append(persona.toString()).append("\n");
-	        }
+	public JList<Persona> getListPersonas() {
+		return listPersonas;
+	}
 
-	        textArea.setText(sb.toString());
-	
+	public void setListPersonas(JList<Persona> listPersonas) {
+		this.listPersonas = listPersonas;
+	}
+
+	public DefaultListModel<Persona> getModel() {
+		return model;
+	}
+
+	public void setModel(DefaultListModel<Persona> model) {
+		this.model = model;
+		listPersonas.setModel(this.model);
+	}
+
+	public JScrollPane getScroll() {
+		return Scroll;
+	}
+
+	public void setScroll(JScrollPane scroll) {
+		Scroll = scroll;
 	}
 	
 	

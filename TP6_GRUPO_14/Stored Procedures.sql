@@ -25,15 +25,18 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE eliminarPersona (
-	IN auxDNI VARCHAR(20),
-    IN auxNombre VARCHAR(45),
-    IN auxApellido VARCHAR(45)
+	IN auxDNI VARCHAR(20)
 )
 BEGIN
     DELETE FROM personas
-    WHERE Dni = auxDNI
-      AND Nombre = auxNombre
-      AND Apellido = auxApellido;
+    WHERE Dni = auxDNI;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE listarPersonas ()
+BEGIN
+    SELECT Dni, Nombre, Apellido FROM personas;
 END$$
 DELIMITER ;
 

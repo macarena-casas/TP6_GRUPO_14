@@ -2,27 +2,23 @@ package presentacion.vista;
 
 import java.awt.BorderLayout;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import entidad.Persona;
 
 public class PanelListar extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
     private JTable PersonaTabla;
     private DefaultTableModel modelPersonas;
-    private JScrollPane spPersona;
+    private JScrollPane tbPersonas;
     private String[] nombreColumnas = {"Nombre", "Apellido", "Dni"};
 
     public PanelListar() {
-    	
-		setLayout(null);
- 
+        setLayout(null);
+
         modelPersonas = new DefaultTableModel(null, nombreColumnas);
         PersonaTabla = new JTable(modelPersonas);
 
@@ -32,14 +28,30 @@ public class PanelListar extends JPanel {
         PersonaTabla.getColumnModel().getColumn(1).setResizable(false);
         PersonaTabla.getColumnModel().getColumn(2).setPreferredWidth(50);
         PersonaTabla.getColumnModel().getColumn(2).setResizable(false); 
-        
-        spPersona  = new JScrollPane();
-        spPersona.setBounds(15, 30, 383, 126);
-        
-        spPersona.setViewportView(PersonaTabla);
-        add(spPersona, BorderLayout.CENTER);
 
-        
+        tbPersonas = new JScrollPane();
+        tbPersonas.setBounds(15, 30, 383, 126);
+        tbPersonas.setViewportView(PersonaTabla);
+
+        add(tbPersonas, BorderLayout.CENTER);
+    }
+
+    public void llenarTabla(List<Persona> personas) {
+        System.out.println("Tamaño de la lista de personas: " + personas.size());
+        for (Persona p : personas) {
+            System.out.println(p.getNombre() + " " + p.getApellido() + " " + p.getDni());
+        }
+
+        this.getModelPersonas().setRowCount(0); 
+        this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
+
+        for (Persona p : personas) {
+            String Nombre = p.getNombre();
+            String Apellido = p.getApellido();
+            String Dni = p.getDni();
+            Object[] fila = {Nombre, Apellido, Dni};
+            this.getModelPersonas().addRow(fila);
+        }
     }
 
     public DefaultTableModel getModelPersonas() {
@@ -55,20 +67,6 @@ public class PanelListar extends JPanel {
     }
 
     public void setPersonaTabla(JTable personaTabla) {
-        PersonaTabla = personaTabla;
-    }
-
-    public void llenarTabla(List<Persona> personas) {
-        this.getModelPersonas().setRowCount(0);
-        this.getModelPersonas().setColumnCount(0);
-        this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
-
-        for (Persona p : personas) {
-            String Nombre = p.getNombre();
-            String Apellido = p.getApellido();
-            String Dni = p.getDni();
-            Object[] fila = {Nombre, Apellido, Dni};
-            this.getModelPersonas().addRow(fila);
-        }
+        this.PersonaTabla = personaTabla;
     }
 }
